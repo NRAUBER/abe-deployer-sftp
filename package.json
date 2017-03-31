@@ -1,0 +1,19 @@
+{
+  "name": "abe-deploy-sftp",
+  "version": "1.0.0",
+  "description": "This plugin sync your site in sftp or ftp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "abecms",
+    "sftp",
+    "ftp"
+  ],
+  "author": "Emmanuel Gonzalez",
+  "license": "MIT",
+  "dependencies": {
+    "ftps": "^1.1.0"
+  }
+}
