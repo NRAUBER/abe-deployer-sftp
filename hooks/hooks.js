@@ -12,6 +12,7 @@ var hooks = {
 					host: abe.config.deployers.sftp.host,
 					requiresPassword: abe.config.deployers.sftp.requiresPassword,
 					username: abe.config.deployers.sftp.username,
+					password: abe.config.deployers.sftp.password,
 					sshKeyPath: abe.config.deployers.sftp.sshKeyPath,
 					remoteDir: abe.config.deployers.sftp.remoteDir,
 					protocol: abe.config.deployers.sftp.protocol,
