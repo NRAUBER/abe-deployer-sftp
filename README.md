@@ -7,9 +7,13 @@ Thanks to [Sébastien Chopin](https://github.com/Atinux/node-ftps)
 
 Everytime you'll publish/unpublish a content, your blog will be sync'ed with the remote directory.
 
-## Configuration
-In abe.json, you must have this entry:
+## Installation
+``` abe install abecms/abe-deployer-sftp```
 
+## Configuration
+In abe.json, just add s "sftp" entry in "deployers" section:
+
+### sftp config with ssh Key
 ```
 "deployers": {
   	"sftp": {
@@ -17,11 +21,28 @@ In abe.json, you must have this entry:
     	"host": "yourserver",
     	"requiresPassword": false,
     	"username": "sftp user",
+    	"requireSSHKey":  true,
     	"sshKeyPath": "/path/to/id_rsa_pub",
     	"remoteDir": "/path/to/your/abecms/site",
-    	"protocol": "sftp",
-    	"requireSSHKey":  true
+    	"protocol": "sftp"
   	}
 }
 ```
-If you want to deactivate the sync, set active as ```false.```
+
+
+### ftp config with username/password:
+```
+"deployers": {
+  	"sftp": {
+    	"active": true,
+    	"host": "yourserver",
+    	"requiresPassword": true,
+    	"username": "sftp user",
+      "password":"Your_PaSSWoRD",
+    	"remoteDir": "/path/to/your/abecms/site",
+    	"protocol": "ftp"
+  	}
+}
+```
+
+If you want to deactivate the plugin, set active as ```false.```
