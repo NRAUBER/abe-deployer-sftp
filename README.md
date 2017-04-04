@@ -4,22 +4,26 @@ An Abe deployer to sync your site in sftp or ftp
 ## Introduction
 This plugin is a sftp-ftp deployer for your Abe blog. It relies on [node-ftps](https://github.com/Atinux/node-ftps).
 Thanks to [Sébastien Chopin](https://github.com/Atinux/node-ftps)  
+
 Everytime you'll publish/unpublish a content, your blog will be sync'ed with the remote directory.
 
 ## Installation
 
 ### 
-You'll need [lftp](https://lftp.yar.ru/) executable on serverside.  
+You'll need [lftp](https://lftp.yar.ru/) executable Abe server side.  
+
 ### Linux
 ```shell
 sudo apt-get install lftp
 # or
 sudo yum install lftp
 ```
+
 ### OSX (Homebrew)
 ```shell
 sudo brew install lftp
 ```
+
 ### Windows 
 ```shell
 C:\> choco install lftp
