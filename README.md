@@ -50,15 +50,15 @@ In abe.json, just add ```sftp``` entry in "deployers" section:
 ### ftp config with username/password:
 ```
 "deployers": {
-  	"sftp": {
-    	"active": true,
-    	"host": "yourserver",
-    	"requiresPassword": true,
-    	"username": "sftp user",
+    "sftp": {
+      "active": true,
+      "host": "yourserver",
+      "requiresPassword": true,
+      "username": "ftp user",
       "password":"Your_PaSSWoRD",
-    	"remoteDir": "/path/to/your/abecms/site",
-    	"protocol": "ftp"
-  	}
+      "remoteDir": "/path/to/your/abecms/site",
+      "protocol": "ftp"
+    }
 }
 ```
 
