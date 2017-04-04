@@ -38,7 +38,7 @@ In abe.json, just add ```sftp``` entry in "deployers" section:
 ### sftp config with ssh Key
 ```
 "deployers": {
-  	"sftp": {
+  "sftp": {
     	"active": true,
     	"host": "yourserver",
     	"requiresPassword": false,
@@ -47,7 +47,7 @@ In abe.json, just add ```sftp``` entry in "deployers" section:
     	"sshKeyPath": "/path/to/id_rsa_pub",
     	"remoteDir": "/path/to/your/abecms/site",
     	"protocol": "sftp"
-  	}
+  }
 }
 ```
 
