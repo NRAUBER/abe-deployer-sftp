@@ -8,7 +8,7 @@ var hooks = {
 		if(abe.config.deployers && abe.config.deployers.sftp && abe.config.deployers.sftp.active === true){
 			const sitePath = path.join(abe.config.root, abe.config.publish.url)
 
-				var ftps = new FTPS({
+				var config = {
 					host: abe.config.deployers.sftp.host,
 					requiresPassword: abe.config.deployers.sftp.requiresPassword,
 					username: abe.config.deployers.sftp.username,
@@ -18,7 +18,12 @@ var hooks = {
 					protocol: abe.config.deployers.sftp.protocol,
 					requireSSHKey: abe.config.deployers.sftp.requireSSHKey,
 					cwd: sitePath
-				})
+				}
+				if (typeof abe.config.deployers.sftp.port !== 'undefined') {
+					config.port = abe.config.deployers.sftp.port
+				}
+
+				var ftps = new FTPS(config)
 
 				ftps.mirror({
 					remoteDir: abe.config.deployers.sftp.remoteDir,
@@ -39,7 +44,7 @@ var hooks = {
 		if(abe.config.deployers && abe.config.deployers.sftp && abe.config.deployers.sftp.active){
 			const sitePath = path.join(abe.config.root, abe.config.publish.url)
 
-				var ftps = new FTPS({
+				var config = {
 					host: abe.config.deployers.sftp.host,
 					requiresPassword: abe.config.deployers.sftp.requiresPassword,
 					username: abe.config.deployers.sftp.username,
@@ -49,7 +54,12 @@ var hooks = {
 					protocol: abe.config.deployers.sftp.protocol,
 					requireSSHKey: abe.config.deployers.sftp.requireSSHKey,
 					cwd: sitePath
-				})
+				}
+				if (typeof abe.config.deployers.sftp.port !== 'undefined') {
+					config.port = abe.config.deployers.sftp.port
+				}
+
+				var ftps = new FTPS(config)
 
 				ftps.mirror({
 					remoteDir: abe.config.deployers.sftp.remoteDir,
