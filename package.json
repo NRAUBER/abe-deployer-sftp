@@ -1,5 +1,5 @@
 {
-  "name": "abe-deploy-sftp",
+  "name": "abe-deployer-sftp",
   "version": "1.0.0",
   "description": "This plugin sync your site in sftp or ftp",
   "main": "index.js",
