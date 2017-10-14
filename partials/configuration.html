@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html data-config='{"URL":"{{abeUrl}}","EXTENSION":"{{@root.config.files.templates.extension}}","TPLPATH":"{{@root.json.abe_meta.template}}","TPLNAME":"{{tplName}}","FILEPATH":"{{@root.json.abe_meta.link}}"}'
+      data-slugs='{{{printJson @root.slugs}}}'
+      data-json='{{{printJson json 1}}}'
+      data-Locales='{{{printJson Locales}}}' >
+  <head>
+    <title>Abe</title>
+    {{abeImport 'common-styles' manager.config this}}
+    <style>
+      html,
+      body{
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+      .label-input{
+        padding: 10px 0;
+      }
+      .input-group{
+        width: 100%;
+      }
+      .form-edit{
+        display: block !important;
+        width: 100% !important;
+        max-width: 400px !important;
+      }
+      .notif{
+        color: #adadad;
+        display: block;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        padding: 30px 20px;
+        background: #f1f1f1;
+        box-shadow: 0px 6px 7px -2px rgba(0,0,0,0.15);
+        transition: all 300ms ease-in-out;
+
+        opacity: 0;
+        transform: translate3d(120%, 0, 0);
+      }
+      .notif-close{
+        position: absolute;
+        top: 6px;
+        right: 5px;
+        background: #e4e4e4;
+        font-size: 10px;
+        display: block;
+        height: 17px;
+        width: 17px;
+        text-align: center;
+        border-radius: 10px;
+        line-height: 15px;
+        color: #f1f1f1;
+        text-decoration: none;
+      }
+      .notif.on{
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    </style>
+
+  </head>
+  <body class="with-menu engine-open">
+    {{abeImport 'header-menu' manager.config this}}
+    <div class="container-main">
+      <div class="container-table">
+        <div>
+          <div class="no-gutter manager-wrapper visible">
+            <div class="manager-left form-wrapper">
+              {{abeImport 'main-menu' manager.config this}}
+            </div>
+            <div class="manager-right tab">
+              <div class="manager-tab">
+                <div class="text-uppercase">
+                  SFTP configuration
+                </div>
+                <div class="manager-tab-content">
+                  <div class="checkbox">
+                    <label><input type="checkbox" name="sftp_active" id="sftp_active"{{#if (isTrue @root.config.sftp.active '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.sftp.active}}">Active</label>
+                  </div>
+                  <div class="input-group">
+                    <div class="label-input">host</div>
+                    <input type="text" name="sftp_host" id="sftp_host" value="{{@root.config.sftp.host}}" class="form-control form-edit">
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" name="sftp_require_password" id="sftp_require_password"{{#if (isTrue @root.config.sftp.requiresPassword '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.sftp.requiresPassword}}">Requires password ?</label>
+                  </div>
+                  <div class="input-group">
+                    <div class="label-input">username</div>
+                    <input type="text" name="sftp_username" id="sftp_username" value="{{@root.config.sftp.username}}" class="form-control form-edit">
+                  </div>
+                  <div class="input-group">
+                    <div class="label-input">password</div>
+                    <input type="text" name="sftp_password" id="sftp_password" value="{{@root.config.sftp.password}}" class="form-control form-edit">
+                  </div>
+                  <div class="input-group">
+                    <div class="label-input">remote directory</div>
+                    <input type="text" name="sftp_remoteDir" id="sftp_remoteDir" value="{{@root.config.sftp.remoteDir}}" class="form-control form-edit">
+                  </div>
+                  <div class="checkbox">
+                    <label><input type="checkbox" name="sftp_requireSSHKey" id="sftp_requireSSHKey"{{#if (isTrue @root.config.sftp.requireSSHKey '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.sftp.requireSSHKey}}">Requires SSH key ?</label>
+                  </div>
+                  <div class="input-group">
+                    <div class="label-input">sshKeyPath</div>
+                    <input type="text" name="sftp_sshKeyPath" id="sftp_sshKeyPath" value="{{@root.config.sftp.sshKeyPath}}" class="form-control form-edit">
+                  </div>
+                  <br>
+                  <button class="btn btn-info" id="save" >
+                    <span>
+                      Save
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{abeImport 'common-scripts' manager.config this}}
+
+    <div class="notif" id="notif">
+      <a class="notif-close" id="notif-close" href="#">x</a>
+      Configuration saved successfully !
+    </div>
+
+  <script>
+    var btn = document.getElementById('save');
+    var host = document.getElementById('sftp_host');
+    var active = document.getElementById('sftp_active');
+    var requiresPassword = document.getElementById('sftp_require_password');
+    var inputElements = document.getElementsByClassName('messageCheckbox');
+    var username = document.getElementById('sftp_username');
+    var password = document.getElementById('sftp_password');
+    var remoteDir = document.getElementById('sftp_remoteDir');
+    var requireSSHKey = document.getElementById('sftp_requireSSHKey');
+    var sshKeyPath = document.getElementById('sftp_sshKeyPath');
+
+    var isSaving = false;
+    var saveUrl = 'configuration';
+    var notif = document.getElementById('notif');
+    var notifClose = document.getElementById('notif-close');
+
+    notifClose.addEventListener('click', function (e) {
+      e.preventDefault();
+      notif.classList.remove('on');
+    });
+
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if(isSaving) return;
+      isSaving = true;
+      btn.classList.add('disabled');
+
+      var request = new XMLHttpRequest();
+      request.open('GET', saveUrl + "?active=" + active.checked + "&host=" + host.value + "&requiresPassword=" + requiresPassword.checked +"&username=" + username.value + "&password=" + password.value + "&remoteDir=" + remoteDir.value + "&requireSSHKey=" + requireSSHKey.checked + "&sshKeyPath=" + sshKeyPath.value);
+      request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+      request.onreadystatechange = function() {
+        if(request.readyState == 4 && request.status == 200) {
+          setTimeout(function () { btn.classList.remove('disabled'); }, 250);
+          notif.classList.add('on');
+          isSaving = false;
+          setTimeout(function () { notif.classList.remove('on'); }, 2500);
+        }
+      }
+      request.send();
+    });
+  </script>
+  </body>
+</html>

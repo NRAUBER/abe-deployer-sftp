@@ -1,6 +1,6 @@
 {
   "name": "abe-deployer-sftp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "This plugin sync your site in sftp or ftp",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,11 @@
     "ftp"
   ],
   "author": "Emmanuel Gonzalez",
+  "contributors":[
+    {
+      "name" : "Gregory Besson"
+    }
+  ],
   "license": "MIT",
   "dependencies": {
     "ftps": "^1.1.0"
