@@ -13,14 +13,20 @@ var hooks = {
 					requiresPassword: abe.config.deployers.sftp.requiresPassword,
 					username: abe.config.deployers.sftp.username,
 					password: abe.config.deployers.sftp.password,
-					sshKeyPath: abe.config.deployers.sftp.sshKeyPath,
 					remoteDir: abe.config.deployers.sftp.remoteDir,
 					protocol: abe.config.deployers.sftp.protocol,
-					requireSSHKey: abe.config.deployers.sftp.requireSSHKey,
 					cwd: sitePath
 				}
 				if (typeof abe.config.deployers.sftp.port !== 'undefined') {
 					config.port = abe.config.deployers.sftp.port
+				}
+
+				if (typeof abe.config.deployers.sftp.requireSSHKey !== 'undefined') {
+					config.requireSSHKey = abe.config.deployers.sftp.requireSSHKey
+				}
+
+				if (typeof abe.config.deployers.sftp.sshKeyPath !== 'undefined') {
+					config.sshKeyPath = abe.config.deployers.sftp.sshKeyPath
 				}
 
 				var ftps = new FTPS(config)
