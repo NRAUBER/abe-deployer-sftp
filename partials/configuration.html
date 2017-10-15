@@ -76,33 +76,33 @@
                 </div>
                 <div class="manager-tab-content">
                   <div class="checkbox">
-                    <label><input type="checkbox" name="sftp_active" id="sftp_active"{{#if (isTrue @root.config.sftp.active '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.sftp.active}}">Active</label>
+                    <label><input type="checkbox" name="sftp_active" id="sftp_active"{{#if (isTrue @root.config.deployers.sftp.active '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.deployers.sftp.active}}">Active</label>
                   </div>
                   <div class="input-group">
                     <div class="label-input">host</div>
-                    <input type="text" name="sftp_host" id="sftp_host" value="{{@root.config.sftp.host}}" class="form-control form-edit">
+                    <input type="text" name="sftp_host" id="sftp_host" value="{{@root.config.deployers.sftp.host}}" class="form-control form-edit">
                   </div>
                   <div class="checkbox">
-                    <label><input type="checkbox" name="sftp_require_password" id="sftp_require_password"{{#if (isTrue @root.config.sftp.requiresPassword '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.sftp.requiresPassword}}">Requires password ?</label>
+                    <label><input type="checkbox" name="sftp_require_password" id="sftp_require_password"{{#if (isTrue @root.config.deployers.sftp.requiresPassword '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.deployers.sftp.requiresPassword}}">Requires password ?</label>
                   </div>
                   <div class="input-group">
                     <div class="label-input">username</div>
-                    <input type="text" name="sftp_username" id="sftp_username" value="{{@root.config.sftp.username}}" class="form-control form-edit">
+                    <input type="text" name="sftp_username" id="sftp_username" value="{{@root.config.deployers.sftp.username}}" class="form-control form-edit">
                   </div>
                   <div class="input-group">
                     <div class="label-input">password</div>
-                    <input type="text" name="sftp_password" id="sftp_password" value="{{@root.config.sftp.password}}" class="form-control form-edit">
+                    <input type="text" name="sftp_password" id="sftp_password" value="{{@root.config.deployers.sftp.password}}" class="form-control form-edit">
                   </div>
                   <div class="input-group">
                     <div class="label-input">remote directory</div>
-                    <input type="text" name="sftp_remoteDir" id="sftp_remoteDir" value="{{@root.config.sftp.remoteDir}}" class="form-control form-edit">
+                    <input type="text" name="sftp_remoteDir" id="sftp_remoteDir" value="{{@root.config.deployers.sftp.remoteDir}}" class="form-control form-edit">
                   </div>
                   <div class="checkbox">
-                    <label><input type="checkbox" name="sftp_requireSSHKey" id="sftp_requireSSHKey"{{#if (isTrue @root.config.sftp.requireSSHKey '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.sftp.requireSSHKey}}">Requires SSH key ?</label>
+                    <label><input type="checkbox" name="sftp_requireSSHKey" id="sftp_requireSSHKey"{{#if (isTrue @root.config.deployers.sftp.requireSSHKey '==' 'true')}} checked="checked"{{/if}} value="{{@root.config.deployers.sftp.requireSSHKey}}">Requires SSH key ?</label>
                   </div>
                   <div class="input-group">
                     <div class="label-input">sshKeyPath</div>
-                    <input type="text" name="sftp_sshKeyPath" id="sftp_sshKeyPath" value="{{@root.config.sftp.sshKeyPath}}" class="form-control form-edit">
+                    <input type="text" name="sftp_sshKeyPath" id="sftp_sshKeyPath" value="{{@root.config.deployers.sftp.sshKeyPath}}" class="form-control form-edit">
                   </div>
                   <br>
                   <button class="btn btn-info" id="save" >
